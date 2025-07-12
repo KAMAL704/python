@@ -1,0 +1,1 @@
+a = "rahul  is a good boy \n but not a bad boy"
