@@ -1,4 +1,1 @@
-
-recognizer = sr.Recognizer()
-engine = pyttsx3.init()
-
+speech_recognition

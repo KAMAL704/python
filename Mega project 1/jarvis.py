@@ -13,15 +13,15 @@ def speak (text):
 
 def processCommand(c):
     if "open google" in c.lower():
-        webbrowser.open("https://googole.com")
+        webbrowser.open("https://google.com")
     elif "open youtube" in c.lower():
         webbrowser.open("https://youtube.com")
     elif "open facebook" in c.lower():
         webbrowser.open("https://facebook.com")
     elif "open linkedin" in c.lower():
         webbrowser.open("https://linkedin.com")
-    elif c.lower().startswitch("play"):
-        song = c.lower().split(" "[1])
+    elif c.lower().startswith("play"):
+
 
         link =  musicLibrary.music[song]
         webbrowser.open(link)

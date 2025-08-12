@@ -1,0 +1,79 @@
+from reportlab.lib.pagesizes import A4
+from reportlab.lib import colors
+from reportlab.pdfgen import canvas
+from reportlab.platypus import Table, TableStyle, Paragraph, SimpleDocTemplate, Spacer
+from reportlab.lib.styles import getSampleStyleSheet
+
+# PDF Settings
+file_name = "Kamal_Kumar_30Day_Cybersecurity_Guide.pdf"
+doc = SimpleDocTemplate(file_name, pagesize=A4)
+styles = getSampleStyleSheet()
+styleH = styles["Heading1"]
+styleN = styles["Normal"]
+
+content = []
+
+# Cover Page
+content.append(Paragraph("<font size=24 color='green'><b>30-Day Advanced Cybersecurity Study Plan</b></font>", styleH))
+content.append(Spacer(1, 20))
+content.append(Paragraph("<font size=18 color='white'>Kamal Kumar – Cybersecurity Student</font>", styleN))
+content.append(Spacer(1, 40))
+content.append(Paragraph("<font size=14 color='gray'>Includes: Timetable, Diagrams, Cheatsheets & Clickable Links</font>", styleN))
+content.append(Spacer(1, 80))
+
+# Week Plan Overview
+content.append(Paragraph("<font size=20 color='green'><b>Week Overview</b></font>", styleH))
+content.append(Spacer(1, 20))
+week_data = [
+    ["Week", "Focus Area"],
+    ["1", "Foundations & Network Security"],
+    ["2", "Wireless & Password Attacks"],
+    ["3", "Web App Security"],
+    ["4", "Advanced Exploitation & Defense"],
+]
+table = Table(week_data, colWidths=[100, 300])
+table.setStyle(TableStyle([('BACKGROUND', (0,0), (-1,0), colors.black),
+                           ('TEXTCOLOR', (0,0), (-1,0), colors.green),
+                           ('ALIGN',(0,0),(-1,-1),'CENTER'),
+                           ('GRID',(0,0),(-1,-1),1,colors.green)]))
+content.append(table)
+content.append(Spacer(1, 20))
+
+# Adding Timetable for Week 1 as sample
+content.append(Paragraph("<font size=16 color='green'><b>Week 1 – Foundations & Network Security</b></font>", styleN))
+content.append(Spacer(1, 10))
+week1_topics = """
+<b>Day 1:</b> Cybersecurity Basics – CIA Triad, Threats, Attack Vectors<br/>
+<b>Day 2:</b> Networking Deep Dive – IP, TCP/UDP, OSI Model<br/>
+<b>Day 3:</b> Nmap Basics – SYN Scan, Service Detection<br/>
+<b>Day 4:</b> Enumeration – Banner Grabbing, Netcat<br/>
+<b>Day 5:</b> Wireshark – Packet Capture & Analysis<br/>
+<b>Day 6:</b> Revision + Labs<br/>
+"""
+content.append(Paragraph(f"<font color='white'>{week1_topics}</font>", styleN))
+content.append(Spacer(1, 20))
+
+# Bonus Cheatsheet Section
+content.append(Paragraph("<font size=16 color='green'><b>Bonus: Top 5 Nmap Commands</b></font>", styleN))
+cheatsheet = """
+1. nmap -sS [IP] – SYN Scan<br/>
+2. nmap -A [IP] – Aggressive Scan<br/>
+3. nmap -O [IP] – OS Detection<br/>
+4. nmap -p- [IP] – Scan All Ports<br/>
+5. nmap --script=vuln [IP] – Vulnerability Scan<br/>
+"""
+content.append(Paragraph(f"<font color='white'>{cheatsheet}</font>", styleN))
+content.append(Spacer(1, 20))
+
+# Clickable Links
+content.append(Paragraph("<font size=16 color='green'><b>Practice Platforms:</b></font>", styleN))
+links = """
+<a href='https://tryhackme.com'>TryHackMe</a><br/>
+<a href='https://hackthebox.com'>Hack The Box</a><br/>
+<a href='https://nmap.org/book/man.html'>Nmap Documentation</a><br/>
+"""
+content.append(Paragraph(f"<font color='white'>{links}</font>", styleN))
+
+# Build PDF
+doc.build(content)
+print(f"✅ PDF generated: {file_name}")
