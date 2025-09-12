@@ -1,0 +1,9 @@
+{
+"flood_window_seconds": 5,
+"flood_packet_threshold": 100,
+"probe_window_seconds": 60,
+"probe_request_threshold": 200,
+"deauth_flag": true,
+"stats_write_interval": 1,
+"alerts_write_interval": 1
+}
