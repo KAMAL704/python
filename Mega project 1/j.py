@@ -21,32 +21,34 @@ def processCommand(c):
     elif "open linkedin" in c:
         webbrowser.open("https://linkedin.com")
     elif c.startswith("play"):
-        song = c.split(" ", 1)[1]  # Get song name after 'play'
+        song = c.split(" ", 1)[1]  # Get song name
         if song in musicLibrary.music:
             link = musicLibrary.music[song]
+            speak(f"Playing {song}")
             webbrowser.open(link)
         else:
             speak(f"Sorry, I couldn't find the song {song}")
+    elif "exit" in c or "quit" in c:
+        speak("Goodbye!")
+        exit()
+    else:
+        speak("Sorry, I don’t know that command yet.")
 
 if __name__ == "__main__":
-    speak("Initializing Jarvis...")
+    speak("Initializing Assistant...")
     while True:
         try:
             with sr.Microphone() as source:
-                print("Listening...")
+                print("Listening for command...")
                 audio = recognizer.listen(source, timeout=5, phrase_time_limit=5)
 
-            word = recognizer.recognize_google(audio)
-            print(f"Detected word: {word}")
+            command = recognizer.recognize_google(audio)
+            print(f"Command: {command}")
+            processCommand(command)
 
-            if word.lower() == "jarvis":
-                speak("Yes?")
-                with sr.Microphone() as source:
-                    print("Listening for command...")
-                    audio = recognizer.listen(source, timeout=5, phrase_time_limit=5)
-                command = recognizer.recognize_google(audio)
-                print(f"Command: {command}")
-                processCommand(command)
-
+        except sr.UnknownValueError:
+            print("Didn't catch that, please repeat...")
+        except sr.RequestError:
+            print("Speech recognition service error.")
         except Exception as e:
             print("Error:", e)
