@@ -17,6 +17,12 @@ Objects (list, dict, class instances) store करता है।
 
 Automatically managed by Garbage Collector।"""
 
+# Memory location
+
 x = 5
 id(x)
+print(id(x))
+
+
+x =45
 print(id(x))
