@@ -5,4 +5,4 @@ print("kamal""rahul", sep=",")
 
 
 print("kamal",   end=" -> ")
-print("rahul")
+print("rahul kumar  n")  
